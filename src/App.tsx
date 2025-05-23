@@ -1,12 +1,12 @@
-import './App.css'
+import "./App.css";
+import WelcomePage from "./pages/WelcomePage/WelcomePage";
 
 function App() {
-
   return (
-    <>
-    <h1>J.A.R.V.I.S.</h1>
-    </>
-  )
+    <div className="w-full">
+      <WelcomePage />
+    </div>
+  );
 }
 
-export default App
+export default App;
