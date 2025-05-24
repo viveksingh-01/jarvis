@@ -1,0 +1,6 @@
+.home-container {
+  background: url("../../assets/img/jarvis-powered-off.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+}
