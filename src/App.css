@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+body {
+  background: url("./assets/img/jarvis-blank.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+}
