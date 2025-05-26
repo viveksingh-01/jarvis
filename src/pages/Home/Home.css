@@ -4,3 +4,9 @@
   background-size: cover;
   height: 100vh;
 }
+
+.container-si-logo {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+}

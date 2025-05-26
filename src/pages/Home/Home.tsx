@@ -4,7 +4,7 @@ import "./Home.css";
 function Home() {
   return (
     <>
-      <div>
+      <div className="container-si-logo">
         <img src={logo} alt="Stark Industries Logo" className="si-logo" />
       </div>
       <div className="home-container"></div>;
