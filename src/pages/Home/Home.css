@@ -10,3 +10,13 @@
   top: 25px;
   left: 25px;
 }
+
+.container-power-btn {
+  position: fixed;
+  bottom: 56px;
+  right: 64px;
+}
+
+.power-btn {
+  color: rgb(232, 232, 232);
+}
