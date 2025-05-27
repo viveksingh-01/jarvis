@@ -19,4 +19,24 @@
 
 .power-btn {
   color: rgb(232, 232, 232);
+  -webkit-animation: animate-button 2000ms infinite;
+  animation: animate-button 2000ms infinite;
+}
+
+@-webkit-keyframes animate-button {
+  0% {
+    color: rgb(121, 235, 255);
+  }
+  100% {
+    color: red;
+  }
+}
+
+@keyframes animate-button {
+  0% {
+    color: rgb(121, 235, 255);
+  }
+  100% {
+    color: red;
+  }
 }
