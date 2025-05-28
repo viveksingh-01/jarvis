@@ -47,3 +47,15 @@
     color: red;
   }
 }
+
+@media screen and (max-width: 575px) {
+  .home-container {
+    background: url("../../assets/img/jarvis-powered-off-m.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+  .container-power-btn {
+    bottom: 125px;
+    left: calc(50% - 31px);
+  }
+}
