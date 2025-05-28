@@ -23,6 +23,13 @@
   animation: animate-button 2000ms infinite;
 }
 
+.power-btn:hover {
+  cursor: pointer;
+  color: rgb(255, 79, 15);
+  animation: none;
+  filter: drop-shadow(0 0 3px rgb(143, 38, 0));
+}
+
 @-webkit-keyframes animate-button {
   0% {
     color: rgb(121, 235, 255);
