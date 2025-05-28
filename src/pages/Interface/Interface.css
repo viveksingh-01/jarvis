@@ -1,0 +1,9 @@
+.container-interface {
+  height: 100vh;
+}
+
+.jarvis-powered-off {
+  background: url("../../assets/img/jarvis-powered-off.jpg");
+  background-position: center;
+  background-size: cover;
+}
