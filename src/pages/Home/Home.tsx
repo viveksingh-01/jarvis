@@ -1,5 +1,6 @@
 import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import logo from "../../assets/img/stark-industries-logo.png";
 import "./Home.css";
 
@@ -11,11 +12,13 @@ function Home() {
       </div>
       <div className="home-container">
         <div className="container-power-btn">
-          <FontAwesomeIcon
-            icon={faPowerOff}
-            size={"4x"}
-            className="power-btn"
-          />
+          <Link to="/on">
+            <FontAwesomeIcon
+              icon={faPowerOff}
+              size={"4x"}
+              className="power-btn"
+            />
+          </Link>
         </div>
       </div>
       ;
