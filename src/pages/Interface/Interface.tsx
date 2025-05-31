@@ -6,6 +6,11 @@ import "./Interface.css";
 function Interface() {
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const [isActivated, setIsActivated] = useState(false);
+  const isActivatedRef = useRef(isActivated);
+
+  useEffect(() => {
+    isActivatedRef.current = isActivated;
+  }, [isActivated]);
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -20,7 +25,7 @@ function Interface() {
       const { isFinal } = results[resultIndex];
       if (isFinal) {
         console.log("transcript", transcript);
-        if (!isActivated) {
+        if (!isActivatedRef.current) {
           checkForActivationCommand(transcript);
         }
       }
