@@ -1,10 +1,11 @@
 import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Interface.css";
 
 function Interface() {
   const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const [isActivated, setIsActivated] = useState(false);
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -19,7 +20,9 @@ function Interface() {
       const { isFinal } = results[resultIndex];
       if (isFinal) {
         console.log("transcript", transcript);
-        checkForActivationCommand(transcript);
+        if (!isActivated) {
+          checkForActivationCommand(transcript);
+        }
       }
     };
 
@@ -36,7 +39,7 @@ function Interface() {
 
     const isActivationCommand = activationCommands.find((item) => item == script);
     if (isActivationCommand) {
-      console.log("Hello sir!");
+      setIsActivated(true);
     }
   };
 
