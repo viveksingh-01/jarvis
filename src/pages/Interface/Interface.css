@@ -14,6 +14,11 @@
   right: 6rem;
 }
 
+.btn-record {
+  color: #dedede;
+  transition: color 0.3s;
+}
+
 .btn-record:hover {
   color: #e94b3e;
   cursor: pointer;

@@ -19,7 +19,7 @@ function Interface() {
         <FontAwesomeIcon
           icon={faMicrophone}
           size={"4x"}
-          className="text-[#dedede] btn-record"
+          className="btn-record"
         />
       </div>
     </div>
