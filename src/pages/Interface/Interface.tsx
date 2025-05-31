@@ -14,6 +14,12 @@ function Interface() {
     recognition.lang = "en-US";
     recognition.interimResults = true;
 
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
+      const { resultIndex, results } = event;
+      const { transcript } = results[resultIndex][0];
+      console.log("transcript", transcript);
+    };
+
     recognitionRef.current = recognition;
   }, []);
 
