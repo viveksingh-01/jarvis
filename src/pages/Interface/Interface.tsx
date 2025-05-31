@@ -7,8 +7,7 @@ function Interface() {
   const recognitionRef = useRef<SpeechRecognition | null>(null);
 
   useEffect(() => {
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     const recognition = new SpeechRecognition();
     recognition.lang = "en-US";
@@ -17,7 +16,11 @@ function Interface() {
     recognition.onresult = (event: SpeechRecognitionEvent) => {
       const { resultIndex, results } = event;
       const { transcript } = results[resultIndex][0];
-      console.log("transcript", transcript);
+      const { isFinal } = results[resultIndex];
+      if (isFinal) {
+        console.log("transcript", transcript);
+        checkForActivationCommand(transcript);
+      }
     };
 
     recognitionRef.current = recognition;
@@ -27,18 +30,20 @@ function Interface() {
     recognitionRef.current?.start();
   };
 
+  const checkForActivationCommand = (script: string) => {
+    script = script.toLowerCase();
+    const activationCommands = ["jarvis", "wake up", "daddy's home", "daddy is home"];
+
+    const isActivationCommand = activationCommands.find((item) => item == script);
+    if (isActivationCommand) {
+      console.log("Hello sir!");
+    }
+  };
+
   return (
     <div className="container-interface jarvis-powered-off">
-      <div
-        id="record-btn"
-        className="record-btn-container"
-        onClick={startListening}
-      >
-        <FontAwesomeIcon
-          icon={faMicrophone}
-          size={"4x"}
-          className="btn-record"
-        />
+      <div id="record-btn" className="record-btn-container" onClick={startListening}>
+        <FontAwesomeIcon icon={faMicrophone} size={"4x"} className="btn-record" />
       </div>
     </div>
   );
