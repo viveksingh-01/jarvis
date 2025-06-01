@@ -14,11 +14,9 @@ function Interface() {
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
     const recognition = new SpeechRecognition();
     recognition.lang = "en-US";
     recognition.interimResults = true;
-
     recognition.onresult = (event: SpeechRecognitionEvent) => {
       const { resultIndex, results } = event;
       const { transcript } = results[resultIndex][0];
@@ -41,12 +39,15 @@ function Interface() {
   const checkForActivationCommand = (script: string) => {
     script = script.toLowerCase();
     const activationCommands = ["jarvis", "wake up", "daddy's home", "daddy is home"];
-
     const isActivationCommand = activationCommands.find((item) => item == script);
     if (isActivationCommand) {
-      setIsActivated(true);
+      activateJarvis();
     }
   };
+
+  function activateJarvis(): void {
+    setIsActivated(true);
+  }
 
   return (
     <div className="container-interface jarvis-powered-off">
