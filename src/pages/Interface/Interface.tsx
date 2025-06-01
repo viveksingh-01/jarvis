@@ -1,6 +1,6 @@
 import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "./Interface.css";
 
 function Interface() {
@@ -11,6 +11,16 @@ function Interface() {
   useEffect(() => {
     isActivatedRef.current = isActivated;
   }, [isActivated]);
+
+  // Use useCallback to memoize the function
+  const checkForActivationCommand = useCallback((script: string) => {
+    script = script.toLowerCase();
+    const activationCommands = ["jarvis", "wake up", "daddy's home", "daddy is home"];
+    const isActivationCommand = activationCommands.find((item) => item == script);
+    if (isActivationCommand) {
+      activateJarvis();
+    }
+  }, []);
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -30,19 +40,10 @@ function Interface() {
     };
 
     recognitionRef.current = recognition;
-  }, []);
+  }, [checkForActivationCommand]);
 
   const startListening = () => {
     recognitionRef.current?.start();
-  };
-
-  const checkForActivationCommand = (script: string) => {
-    script = script.toLowerCase();
-    const activationCommands = ["jarvis", "wake up", "daddy's home", "daddy is home"];
-    const isActivationCommand = activationCommands.find((item) => item == script);
-    if (isActivationCommand) {
-      activateJarvis();
-    }
   };
 
   function activateJarvis(): void {
