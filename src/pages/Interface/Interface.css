@@ -8,6 +8,12 @@
   background-size: cover;
 }
 
+.jarvis-activated {
+  background: url("../../assets/img/jarvis-activated.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
 .record-btn-container {
   position: fixed;
   bottom: 5rem;

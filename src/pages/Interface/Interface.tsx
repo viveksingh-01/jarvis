@@ -51,7 +51,7 @@ function Interface() {
   }
 
   return (
-    <div className="container-interface jarvis-powered-off">
+    <div className={`container-interface ${isActivated ? "jarvis-activated" : "jarvis-powered-off"}`}>
       <div id="record-btn" className="record-btn-container" onClick={startListening}>
         <FontAwesomeIcon icon={faMicrophone} size={"4x"} className="btn-record" />
       </div>
