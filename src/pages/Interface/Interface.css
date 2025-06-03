@@ -3,13 +3,13 @@
 }
 
 .jarvis-powered-off {
-  background: url("../../assets/img/jarvis-powered-off.jpg");
+  background: url("/assets/img/jarvis-powered-off.jpg");
   background-position: center;
   background-size: cover;
 }
 
 .jarvis-activated {
-  background: url("../../assets/img/jarvis-activated.jpg");
+  background: url("/assets/img/jarvis-activated.jpg");
   background-position: center;
   background-size: cover;
 }
@@ -32,13 +32,13 @@
 
 @media screen and (max-width: 575px) {
   .jarvis-powered-off {
-    background: url("../../assets/img/jarvis-powered-off-m.jpg");
+    background: url("/assets/img/jarvis-powered-off-m.jpg");
     background-position: center;
     background-size: cover;
   }
 
   .jarvis-activated {
-    background: url("../../assets/img/jarvis-activated-m.jpg");
+    background: url("/assets/img/jarvis-activated-m.jpg");
     background-position: center;
     background-size: cover;
   }

@@ -1,9 +1,9 @@
 import { Outlet, Route, Routes } from "react-router-dom";
 import "./App.css";
-import logo from "./assets/img/stark-industries-logo.png";
 import Home from "./pages/Home/Home";
 import Interface from "./pages/Interface/Interface";
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
+import logo from "/assets/img/stark-industries-logo.png";
 
 function WithLogoLayout() {
   return (
