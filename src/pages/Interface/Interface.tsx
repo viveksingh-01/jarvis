@@ -28,7 +28,9 @@ function Interface() {
 
   function greetUser(message: string) {
     speech.text = message;
-    window.speechSynthesis.speak(speech);
+    setTimeout(() => {
+      window.speechSynthesis.speak(speech);
+    }, 750);
   }
 
   function checkForActivationCommand(script: string) {
