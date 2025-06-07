@@ -1,6 +1,6 @@
 import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Audio from "../../components/Audio/Audio";
 import "./Interface.css";
 
@@ -19,15 +19,26 @@ function Interface() {
     isActivatedRef.current = isActivated;
   }, [isActivated]);
 
-  // Use useCallback to memoize the function
-  const checkForActivationCommand = useCallback((script: string) => {
+  function activateJarvis(): void {
+    setIsActivated(true);
+    setAudioSource("power-on");
+    audioRef.current?.play();
+    greetUser("Hello sir!");
+  }
+
+  function greetUser(message: string) {
+    speech.text = message;
+    window.speechSynthesis.speak(speech);
+  }
+
+  function checkForActivationCommand(script: string) {
     script = script.toLowerCase();
     const activationCommands = ["jarvis", "wake up", "daddy's home", "daddy is home"];
     const isActivationCommand = activationCommands.find((item) => item == script);
     if (isActivationCommand) {
       activateJarvis();
     }
-  }, []);
+  }
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -45,26 +56,13 @@ function Interface() {
         }
       }
     };
-
     recognitionRef.current = recognition;
-  }, [checkForActivationCommand]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // No dependency warning
 
   const startListening = () => {
     recognitionRef.current?.start();
   };
-
-  function activateJarvis(): void {
-    setIsActivated(true);
-    setAudioSource("power-on");
-    audioRef.current?.play();
-    greetUser("Hello, sir!");
-  }
-
-  function greetUser(message: string) {
-    console.log("speech", message);
-    speech.text = message;
-    window.speechSynthesis.speak(speech);
-  }
 
   return (
     <div className={`container-interface ${isActivated ? "jarvis-activated" : "jarvis-powered-off"}`}>
