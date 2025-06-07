@@ -4,6 +4,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Audio from "../../components/Audio/Audio";
 import "./Interface.css";
 
+const speech = new SpeechSynthesisUtterance();
+speech.volume = 1;
+speech.rate = 1;
+
 function Interface() {
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const [isActivated, setIsActivated] = useState(false);
@@ -53,6 +57,13 @@ function Interface() {
     setIsActivated(true);
     setAudioSource("power-on");
     audioRef.current?.play();
+    greetUser("Hello, sir!");
+  }
+
+  function greetUser(message: string) {
+    console.log("speech", message);
+    speech.text = message;
+    window.speechSynthesis.speak(speech);
   }
 
   return (
