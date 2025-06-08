@@ -41,13 +41,17 @@ function Interface() {
     } else {
       greetingMsg = "It's late, not getting sleep?";
     }
-    speech.text = greetingMsg;
     setTimeout(() => {
-      window.speechSynthesis.speak(speech);
+      speak(greetingMsg);
     }, 750);
   }
 
   const selectRandomItem = (itemList: string[]) => itemList[Math.floor(Math.random() * itemList.length)];
+
+  function speak(message: string) {
+    speech.text = message;
+    window.speechSynthesis.speak(speech);
+  }
 
   function checkForActivationCommand(script: string) {
     script = script.toLowerCase();
