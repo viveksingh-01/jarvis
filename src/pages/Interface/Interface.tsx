@@ -33,11 +33,11 @@ function Interface() {
     const hour = new Date().getHours();
     let greetingMsg = "";
     if (hour >= 4 && hour < 12) {
-      greetingMsg = greetings.morning[0];
+      greetingMsg = selectRandomItem(greetings.morning);
     } else if (hour >= 12 && hour < 16) {
-      greetingMsg = greetings.noon[0];
+      greetingMsg = selectRandomItem(greetings.noon);
     } else if (hour >= 16 && hour < 24) {
-      greetingMsg = greetings.evening[0];
+      greetingMsg = selectRandomItem(greetings.evening);
     } else {
       greetingMsg = "It's late, not getting sleep?";
     }
@@ -46,6 +46,8 @@ function Interface() {
       window.speechSynthesis.speak(speech);
     }, 750);
   }
+
+  const selectRandomItem = (itemList: string[]) => itemList[Math.floor(Math.random() * itemList.length)];
 
   function checkForActivationCommand(script: string) {
     script = script.toLowerCase();
