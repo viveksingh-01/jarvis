@@ -1,5 +1,6 @@
 import { Outlet, Route, Routes } from "react-router-dom";
 import "./App.css";
+import MessageProvider from "./contexts/MessageProvider";
 import Home from "./pages/Home/Home";
 import Interface from "./pages/Interface/Interface";
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
@@ -23,7 +24,14 @@ function App() {
         <Route path="/" Component={WelcomePage} />
         <Route element={<WithLogoLayout />}>
           <Route path="/home" Component={Home} />
-          <Route path="/on" Component={Interface} />
+          <Route
+            path="/on"
+            element={
+              <MessageProvider>
+                <Interface />
+              </MessageProvider>
+            }
+          />
         </Route>
       </Routes>
     </div>
