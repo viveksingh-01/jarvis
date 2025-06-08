@@ -1,7 +1,8 @@
 import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Audio from "../../components/Audio/Audio";
+import MessageContext from "../../contexts/MessageContext";
 import "./Interface.css";
 
 const speech = new SpeechSynthesisUtterance();
@@ -14,6 +15,7 @@ function Interface() {
   const [audioSource, setAudioSource] = useState<string | null>(null);
   const isActivatedRef = useRef(isActivated);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const messages = useContext(MessageContext);
 
   useEffect(() => {
     isActivatedRef.current = isActivated;
@@ -23,11 +25,23 @@ function Interface() {
     setIsActivated(true);
     setAudioSource("power-on");
     audioRef.current?.play();
-    greetUser("Hello sir!");
+    greetUser();
   }
 
-  function greetUser(message: string) {
-    speech.text = message;
+  function greetUser() {
+    const { greetings } = messages;
+    const hour = new Date().getHours();
+    let greetingMsg = "";
+    if (hour >= 4 && hour < 12) {
+      greetingMsg = greetings.morning[0];
+    } else if (hour >= 12 && hour < 16) {
+      greetingMsg = greetings.noon[0];
+    } else if (hour >= 16 && hour < 24) {
+      greetingMsg = greetings.evening[0];
+    } else {
+      greetingMsg = "It's late, not getting sleep?";
+    }
+    speech.text = greetingMsg;
     setTimeout(() => {
       window.speechSynthesis.speak(speech);
     }, 750);
@@ -60,7 +74,7 @@ function Interface() {
     };
     recognitionRef.current = recognition;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // No dependency warning
+  }, []);
 
   const startListening = () => {
     recognitionRef.current?.start();
