@@ -59,6 +59,9 @@ function Interface() {
     const isActivationCommand = activationCommands.find((item) => item == script);
     if (isActivationCommand) {
       activateJarvis();
+    } else {
+      const activationErrorMsg = "Sorry but I'm afraid I'm not activated.";
+      speak(activationErrorMsg);
     }
   }
 
@@ -84,6 +87,7 @@ function Interface() {
 
   const startListening = () => {
     recognitionRef.current?.start();
+    // activateJarvis();
   };
 
   return (
