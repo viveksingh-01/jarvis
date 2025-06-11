@@ -65,6 +65,11 @@ function Interface() {
     }
   }
 
+  function processCommand(command: string): void {
+    // TODO
+    console.log(command);
+  }
+
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
@@ -78,6 +83,8 @@ function Interface() {
         console.log("transcript", transcript);
         if (!isActivatedRef.current) {
           checkForActivationCommand(transcript);
+        } else {
+          processCommand(transcript.toLowerCase());
         }
       }
     };
