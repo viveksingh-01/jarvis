@@ -65,9 +65,22 @@ function Interface() {
     }
   }
 
+  function fetchTime(): string {
+    const date = new Date();
+    const timeString = date.toLocaleTimeString("en-US", { hour12: true });
+    const [time, meridian] = timeString.split(" ");
+    const [hr, min] = time.split(":");
+    return `It's ${hr} ${min} ${meridian}`;
+  }
+
   function processCommand(command: string): void {
-    // TODO
-    console.log(command);
+    let speechOutput: string;
+    if (command.includes("time")) {
+      speechOutput = fetchTime();
+    } else {
+      speechOutput = "Sorry, I didn't get you";
+    }
+    speak(speechOutput);
   }
 
   useEffect(() => {
