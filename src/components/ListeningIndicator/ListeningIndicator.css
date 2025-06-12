@@ -1,0 +1,13 @@
+.listening-indicator {
+  position: fixed;
+  top: calc(50% + 7rem);
+  left: calc(50% - 3.25rem);
+}
+
+@media screen and (max-width: 575px) {
+  .listening-indicator {
+    position: fixed;
+    top: calc(50% + 6.5rem);
+    left: calc(50% - 3rem);
+  }
+}
