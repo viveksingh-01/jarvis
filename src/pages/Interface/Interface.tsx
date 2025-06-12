@@ -2,6 +2,7 @@ import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect, useRef, useState } from "react";
 import Audio from "../../components/Audio/Audio";
+import ListeningIndicator from "../../components/ListeningIndicator/ListeningIndicator";
 import MessageContext from "../../contexts/MessageContext";
 import "./Interface.css";
 
@@ -12,6 +13,7 @@ speech.rate = 1;
 function Interface() {
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const [isActivated, setIsActivated] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   const [audioSource, setAudioSource] = useState<string | null>(null);
   const isActivatedRef = useRef(isActivated);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -85,7 +87,7 @@ function Interface() {
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
+    const recognition: SpeechRecognition = new SpeechRecognition();
     recognition.lang = "en-US";
     recognition.interimResults = true;
     recognition.onresult = (event: SpeechRecognitionEvent) => {
@@ -101,17 +103,19 @@ function Interface() {
         }
       }
     };
+    recognition.onend = () => setIsListening(false);
     recognitionRef.current = recognition;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const startListening = () => {
     recognitionRef.current?.start();
-    // activateJarvis();
+    setIsListening(true);
   };
 
   return (
     <div className={`container-interface ${isActivated ? "jarvis-activated" : "jarvis-powered-off"}`}>
+      <ListeningIndicator isListening={isListening} />
       <div id="record-btn" className="record-btn-container" onClick={startListening}>
         <FontAwesomeIcon icon={faMicrophone} size={"4x"} className="btn-record" />
       </div>
