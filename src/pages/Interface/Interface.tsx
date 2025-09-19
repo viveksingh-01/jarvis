@@ -14,6 +14,7 @@ function Interface() {
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const [isActivated, setIsActivated] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [command, setCommand] = useState("");
   const [audioSource, setAudioSource] = useState<string | null>(null);
   const isActivatedRef = useRef(isActivated);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -94,6 +95,7 @@ function Interface() {
       const { resultIndex, results } = event;
       const { transcript } = results[resultIndex][0];
       const { isFinal } = results[resultIndex];
+      setCommand(transcript);
       if (isFinal) {
         console.log("transcript", transcript);
         if (!isActivatedRef.current) {
@@ -103,7 +105,10 @@ function Interface() {
         }
       }
     };
-    recognition.onend = () => setIsListening(false);
+    recognition.onend = () => {
+      setCommand("");
+      setIsListening(false);
+    };
     recognitionRef.current = recognition;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -115,7 +120,7 @@ function Interface() {
 
   return (
     <div className={`container-interface ${isActivated ? "jarvis-activated" : "jarvis-powered-off"}`}>
-      <ListeningIndicator isListening={isListening} />
+      <ListeningIndicator isListening={isListening} speech={command} />
       <div id="record-btn" className="record-btn-container" onClick={startListening}>
         <FontAwesomeIcon icon={faMicrophone} size={"4x"} className="btn-record" />
       </div>
