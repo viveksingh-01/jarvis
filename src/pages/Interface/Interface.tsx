@@ -1,6 +1,7 @@
 import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect, useRef, useState } from "react";
+import { getResponse } from "../../api/conversation";
 import Audio from "../../components/Audio/Audio";
 import ListeningIndicator from "../../components/ListeningIndicator/ListeningIndicator";
 import MessageContext from "../../contexts/MessageContext";
@@ -76,12 +77,12 @@ function Interface() {
     return `It's ${hr} ${min} ${meridian}`;
   }
 
-  function processCommand(command: string): void {
-    let speechOutput: string;
-    if (command.includes("time")) {
+  async function processCommand(prompt: string) {
+    let speechOutput = "Sorry, I didn't get you";
+    if (prompt.includes("time")) {
       speechOutput = fetchTime();
     } else {
-      speechOutput = "Sorry, I didn't get you";
+      speechOutput = await getResponse(prompt);
     }
     speak(speechOutput);
   }
