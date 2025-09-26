@@ -32,6 +32,12 @@ function Interface() {
     greetUser();
   }
 
+  function shutdown() {
+    setIsActivated(false);
+    setAudioSource("power-off");
+    audioRef.current?.play();
+  }
+
   function greetUser() {
     const { greetings } = messages;
     const hour = new Date().getHours();
@@ -81,6 +87,9 @@ function Interface() {
     let speechOutput = "Sorry, I didn't get you";
     if (prompt.includes("time")) {
       speechOutput = fetchTime();
+    } else if (prompt.includes("shutdown") || prompt.includes("sleep")) {
+      shutdown();
+      return;
     } else {
       speechOutput = await getResponse(prompt);
     }
