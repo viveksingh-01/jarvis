@@ -28,15 +28,20 @@ function Interface() {
   function activateJarvis(): void {
     setIsActivated(true);
     setAudioSource("power-on");
-    audioRef.current?.play();
     greetUser();
   }
 
   function shutdown() {
     setIsActivated(false);
     setAudioSource("power-off");
-    audioRef.current?.play();
   }
+
+  useEffect(() => {
+    if (audioSource && audioRef.current) {
+      audioRef.current.load();
+      audioRef.current.play();
+    }
+  }, [audioSource]);
 
   function greetUser() {
     const { greetings } = messages;
